@@ -1,7 +1,6 @@
 // app/page.jsx — Server Component (SEO + Schema Layer)
 // The client-side interactive hero lives in ./HeroClient.jsx (or ./index.jsx)
 import React from "react";
-import Script from "next/script";
 import HeroClient from "@/components/Hero/index"; // Client-side interactive hero component
 
 function getBaseUrl() {
@@ -365,47 +364,26 @@ export default function HomePage() {
     },
   };
 
+  const structuredData = [
+    ["schema-website", webSiteSchema],
+    ["schema-person", personSchema],
+    ["schema-ecosystem", ecosystemSchema],
+    ["schema-lionxe", lionxeSchema],
+    ["schema-breadcrumb", breadcrumbSchema],
+    ["schema-webpage", webPageSchema],
+  ];
+
   return (
     <>
-      <Script
-        id="schema-website"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
-        strategy="afterInteractive"
-      />
-      <Script
-        id="schema-person"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-        strategy="afterInteractive"
-      />
-      <Script
-        id="schema-ecosystem"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(ecosystemSchema) }}
-        strategy="afterInteractive"
-      />
-      <Script
-        id="schema-lionxe"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(lionxeSchema) }}
-        strategy="afterInteractive"
-      />
-      <Script
-        id="schema-breadcrumb"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-        strategy="afterInteractive"
-      />
-      <Script
-        id="schema-webpage"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
-        strategy="afterInteractive"
-      />
-
-    
-
+      <HeroClient />
+      {structuredData.map(([id, schema]) => (
+        <script
+          key={id}
+          id={id}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
     </>
   );
 }

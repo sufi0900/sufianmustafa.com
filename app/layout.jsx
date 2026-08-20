@@ -12,7 +12,6 @@ import { useOnlineStatus } from "./useOnlineStatus";
 import { Inter } from "next/font/google";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
-import Hero from "@/components/Hero/index";
 import Header from "@/components/Hero/Navbar";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
@@ -49,9 +48,7 @@ export default function RootLayout({ children }) {
   const pathname = usePathname();
   const isOnline = useOnlineStatus();
 
-  const [hydrated, setHydrated] = useState(false);
   const [isOfflineRetrying, setIsOfflineRetrying] = useState(false);
-  const [refreshCount, setRefreshCount] = useState(0);
   const [showConstructionBar, setShowConstructionBar] = useState(true);
 
   const handleOfflineRetry = () => {
@@ -67,11 +64,35 @@ export default function RootLayout({ children }) {
   };
 
   useEffect(() => {
-    setHydrated(true);
+    // The homepage does not use Slick. Avoid injecting two global stylesheets
+    // during its critical hydration/interaction window.
+    if (pathname === "/") return;
 
-    import("slick-carousel/slick/slick.css");
-    import("slick-carousel/slick/slick-theme.css");
-  }, []);
+    let cancelled = false;
+    const loadCarouselStyles = () => {
+      if (cancelled) return;
+      void Promise.all([
+        import("slick-carousel/slick/slick.css"),
+        import("slick-carousel/slick/slick-theme.css"),
+      ]);
+    };
+
+    if ("requestIdleCallback" in window) {
+      const idleId = window.requestIdleCallback(loadCarouselStyles, {
+        timeout: 2500,
+      });
+      return () => {
+        cancelled = true;
+        window.cancelIdleCallback(idleId);
+      };
+    }
+
+    const timeoutId = window.setTimeout(loadCarouselStyles, 1200);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timeoutId);
+    };
+  }, [pathname]);
 
   useEffect(() => {
     const goOnline = () => {
@@ -134,12 +155,6 @@ export default function RootLayout({ children }) {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  useEffect(() => {
-    if (hydrated) {
-      setRefreshCount((prevCount) => prevCount + 1);
-    }
-  }, [hydrated]);
-
   const cleanPathname = pathname === "/" ? "/" : pathname.replace(/\/$/, "");
 
   const isHomePage = cleanPathname === "/";
@@ -171,16 +186,16 @@ export default function RootLayout({ children }) {
         <Script
           src="https://analytics.ahrefs.com/analytics.js"
           data-key="vodw9TgfqC4efMfrAO9xrw"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
 
         {/* Google Analytics (GA4) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-SHX78424XN"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
 
-        <Script id="ga4-init" strategy="afterInteractive">
+        <Script id="ga4-init" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -192,7 +207,7 @@ export default function RootLayout({ children }) {
         </Script>
       </head>
 
-      <body className={`${inter.className} bg-[#f0fdfa] dark:bg-black`}>
+      <body className={`${inter.className} overflow-x-clip bg-[#f0fdfa] dark:bg-black`}>
         <noscript>JavaScript is required for this app to work properly.</noscript>
 
         {/* ENHANCED OFFLINE BAR */}
@@ -232,7 +247,7 @@ export default function RootLayout({ children }) {
                       </p>
 
                       <p className="mt-1 text-sm text-gray-700 dark:text-gray-300">
-                        {refreshCount} components • Using cached content
+                        Cached content is still available
                       </p>
                     </div>
                   </div>
@@ -309,11 +324,11 @@ export default function RootLayout({ children }) {
           {/* ADVANCED COORDINATED LAYOUT SYSTEM FOR TOP BAR */}
           {showConstructionBar && (
             <>
-              <div 
+              <div
                 className={[
-                  "bg-amber-500/10 border border-amber-500/20 text-amber-800 dark:text-amber-400 px-3 py-2 sm:px-4 sm:py-2.5 text-center text-[11px] sm:text-[12.5px] font-bold flex items-center justify-between shadow-sm backdrop-blur-md animate-fade-in",
-                  isHomePage 
-                    ? "relative z-[9999] rounded-xl mt-3 sm:mt-4 max-w-[calc(100%-24px)] sm:max-w-7xl mx-auto w-full" 
+                  "construction-notice bg-amber-500/10 border border-amber-500/20 text-amber-800 dark:text-amber-400 px-3 py-2 sm:px-4 sm:py-2.5 text-center text-[11px] sm:text-[12.5px] font-bold flex items-center justify-between shadow-sm sm:backdrop-blur-md animate-fade-in",
+                  isHomePage
+                    ? "relative z-[9999] rounded-xl mt-3 sm:mt-4 max-w-[calc(100%-24px)] sm:max-w-7xl mx-auto w-full"
                     : "fixed top-0 left-0 right-0 w-full z-[10000] border-x-0 border-t-0 rounded-none"
                 ].join(" ")}
               >
@@ -330,7 +345,7 @@ export default function RootLayout({ children }) {
                     </span>
                   </span>
                 </div>
-                <button 
+                <button
                   onClick={() => setShowConstructionBar(false)}
                   className="p-1 text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-lg transition-colors ml-1 sm:ml-2 shrink-0 focus:outline-none"
                   aria-label="Dismiss notice"
@@ -350,7 +365,7 @@ export default function RootLayout({ children }) {
                   .fixed.top-0.left-0.w-full.z-40 {
                     top: 45px !important;
                   }
-                  
+
                   /* SMART EXCEPTION: Balanced container normalization specifically calibrated for the contact grid */
                   ${pathname === '/contact' ? `
                     main {
@@ -367,7 +382,7 @@ export default function RootLayout({ children }) {
                     .pn-header, .fixed.top-0.left-0.w-full.z-40 {
                       top: 36px !important;
                     }
-                    
+
                     ${pathname === '/contact' ? `
                       main {
                         padding-top: 36px !important;
@@ -389,24 +404,18 @@ export default function RootLayout({ children }) {
             <Header />
           ) : null}
 
-          {isHomePage && <Hero />}
+          <CacheProvider>
+            <main className={shouldAddTopPadding && !showConstructionBar ? "pt-[80px]" : ""}>
+              {children}
+            </main>
 
-          {hydrated && (
-            <>
-              <CacheProvider>
-                <main className={shouldAddTopPadding && !showConstructionBar ? "pt-[80px]" : ""}>
-                  {children}
-                </main>
+            <Footer />
+            <ScrollToTop />
+          </CacheProvider>
 
-                <Footer />
-                <ScrollToTop />
-              </CacheProvider>
-
-              <Toaster position="bottom-center" />
-              <SpeedInsights />
-              <Analytics />
-            </>
-          )}
+          <Toaster position="bottom-center" />
+          <SpeedInsights />
+          <Analytics />
         </Providers>
       </body>
     </html>

@@ -1,32 +1,49 @@
 // components/Hero/ParticleField.jsx
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
-/* PERF: fewer particles on small/mobile screens — same visual effect,
-   less per-frame canvas work on the devices least able to spare it. */
+/* The canvas is intentionally static on touch/mobile devices. Desktop keeps
+   the ambient movement, capped at 30 paints per second, and pauses when the
+   hero or browser tab is not visible. */
 export default function ParticleField({ accent, isDesktop }) {
   const canvasRef = useRef(null);
-  const [particles] = useState(() =>
-    Array.from({ length: isDesktop ? 22 : 10 }, (_, i) => ({
-      id: i, x: Math.random() * 100, y: Math.random() * 100,
-      size: Math.random() * 2.5 + 0.8, opacity: Math.random() * 0.45 + 0.1,
-      speed: Math.random() * 0.012 + 0.004, drift: (Math.random() - 0.5) * 0.008,
-    }))
-  );
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    const shouldAnimate = isDesktop && !prefersReducedMotion;
+
+    const particles = Array.from({ length: isDesktop ? 16 : 10 }, (_, id) => ({
+      id,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 2.5 + 0.8,
+      opacity: Math.random() * 0.45 + 0.1,
+      // Percentage of the canvas travelled per second.
+      speed: Math.random() * 0.72 + 0.24,
+      drift: (Math.random() - 0.5) * 0.48,
+    }));
+
     let animId = null;
     const pState = particles.map((p) => ({
       ...p,
       fillStyle: `${accent}${Math.round(p.opacity * 255).toString(16).padStart(2, "0")}`,
     }));
-    const render = () => {
+
+    let isInView = true;
+    let isPageVisible = !document.hidden;
+    let lastPaint = 0;
+    const frameInterval = 1000 / 30;
+
+    const draw = (deltaSeconds = 0) => {
       const { width, height } = canvas;
       ctx.clearRect(0, 0, width, height);
       pState.forEach((p) => {
@@ -34,36 +51,85 @@ export default function ParticleField({ accent, isDesktop }) {
         ctx.beginPath(); ctx.arc(px, py, p.size, 0, Math.PI * 2);
         ctx.fillStyle = p.fillStyle;
         ctx.fill();
-        p.y -= p.speed; p.x += p.drift;
+
+        p.y -= p.speed * deltaSeconds;
+        p.x += p.drift * deltaSeconds;
         if (p.y < -2) p.y = 102; if (p.x < -2) p.x = 102; if (p.x > 102) p.x = -2;
       });
+    };
+
+    const stop = () => {
+      if (animId !== null) cancelAnimationFrame(animId);
+      animId = null;
+      lastPaint = 0;
+    };
+
+    const render = (now) => {
+      animId = null;
+      if (!shouldAnimate || !isInView || !isPageVisible) return;
+
+      if (!lastPaint || now - lastPaint >= frameInterval) {
+        const deltaSeconds = lastPaint
+          ? Math.min((now - lastPaint) / 1000, 0.05)
+          : 0;
+        draw(deltaSeconds);
+        lastPaint = now;
+      }
+
       animId = requestAnimationFrame(render);
     };
-    const resize = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; };
+
+    const start = () => {
+      if (
+        shouldAnimate &&
+        isInView &&
+        isPageVisible &&
+        animId === null
+      ) {
+        animId = requestAnimationFrame(render);
+      }
+    };
+
+    const resize = () => {
+      const width = Math.max(1, Math.round(canvas.offsetWidth));
+      const height = Math.max(1, Math.round(canvas.offsetHeight));
+
+      if (canvas.width !== width) canvas.width = width;
+      if (canvas.height !== height) canvas.height = height;
+      draw(0);
+    };
+
     resize();
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
 
-    /* PERF: stop scheduling animation frames entirely once the hero has
-       scrolled out of view, instead of drawing an invisible canvas 60
-       times a second. Resumes the moment it's back in the viewport. */
     let io = null;
-    if (typeof IntersectionObserver !== "undefined") {
+    if (shouldAnimate && typeof IntersectionObserver !== "undefined") {
       io = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting) {
-          if (animId === null) animId = requestAnimationFrame(render);
-        } else if (animId !== null) {
-          cancelAnimationFrame(animId);
-          animId = null;
-        }
+        isInView = entry.isIntersecting;
+        if (isInView) start();
+        else stop();
       }, { threshold: 0 });
       io.observe(canvas);
-    } else {
-      render();
+    } else if (shouldAnimate) {
+      start();
     }
 
-    return () => { if (animId !== null) cancelAnimationFrame(animId); ro.disconnect(); if (io) io.disconnect(); };
-  }, [accent, particles]);
+    const handleVisibilityChange = () => {
+      isPageVisible = !document.hidden;
+      if (isPageVisible) start();
+      else stop();
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      stop();
+      ro.disconnect();
+      io?.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [accent, isDesktop]);
 
   return (
     <canvas

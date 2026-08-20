@@ -1,5 +1,4 @@
-// previosul= app/portfolio/report/full-report/page.tsx
-//now= report/page.tsx
+//  app/portfolio/report/full-report/page.tsx
 // PUBLIC UNIFIED REPORT — all 16 anonymized chapters in a single
 // scrollable page. Users can read inline or download as PDF.
 

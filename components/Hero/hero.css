@@ -4,6 +4,10 @@
    ══════════════════════════════════════════════════════════════════════════ */
 
 /* ── Entrance + ambient ── */
+.hero-root { overflow-x: clip; }
+@supports not (overflow: clip) {
+  .hero-root { overflow-x: hidden; }
+}
 .hero-fade-in { animation: heroFadeUp 0.65s cubic-bezier(0.2, 0.9, 0.3, 1) both; }
 @keyframes heroFadeUp { from { opacity: 0; transform: translateY(20px); filter: blur(4px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
 @keyframes gradientShift { 0%,100% { background-position: 0% center; } 50% { background-position: 100% center; } }
@@ -32,11 +36,17 @@
 .hero-cta:hover .hero-cta-arrow-r { transform: translateX(4px); }
 
 .hero-cta::before {
-  content: ""; position: absolute; inset: 0; z-index: 2; border-radius: inherit;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.0) 30%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.0) 70%, transparent);
-  background-size: 200% 100%; animation: infiniteShimmer 3s linear infinite; pointer-events: none;
+  content: ""; position: absolute; top: 0; bottom: 0; left: -65%; width: 55%;
+  z-index: 2; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04) 30%, rgba(255,255,255,0.24) 50%, rgba(255,255,255,0.04) 70%, transparent);
+  transform: translate3d(-20%, 0, 0) skewX(-18deg);
+  animation: infiniteShimmer 3.4s linear infinite;
+  will-change: transform;
 }
-@keyframes infiniteShimmer { 0% { background-position: 150% center; } 100% { background-position: -50% center; } }
+@keyframes infiniteShimmer {
+  from { transform: translate3d(-20%, 0, 0) skewX(-18deg); }
+  to { transform: translate3d(430%, 0, 0) skewX(-18deg); }
+}
 
 .hero-cta-bg { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; }
 
@@ -63,7 +73,7 @@
 /* ══════════════════════════════════════════════════════════════════════════
    ROLE TRACK
    ══════════════════════════════════════════════════════════════════════════ */
-.role-track { position: relative; height: 34px; display: flex; align-items: center; padding: 0 10px; outline: none; }
+.role-track { position: relative; height: 34px; display: flex; align-items: center; padding: 0 10px; outline: none; touch-action: pan-y; }
 .role-track:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 12px; }
 .role-track-rail { position: absolute; left: 10px; right: 10px; height: 5px; border-radius: 999px; background: color-mix(in srgb, var(--accent) 14%, transparent); }
 .role-track-fill { position: absolute; left: 10px; height: 5px; border-radius: 999px; width: calc((100% - 20px) * var(--pos)); transition: width 0.3s cubic-bezier(0.2,0.9,0.3,1), background 0.3s; pointer-events: none; }
@@ -856,13 +866,119 @@
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
+   MOBILE / TOUCH PERFORMANCE MODE
+   Keep the information and interactions, but remove the paint-heavy parts
+   that provide little value on a small, coarse-pointer screen.
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 1023px), (hover: none), (pointer: coarse) {
+  .hero-root {
+    min-height: 100svh;
+  }
+
+  .hero-ambient-rings .ring-spin-cw-slow,
+  .hero-ambient-rings .ring-spin-ccw,
+  .hero-ambient-rings .ring-spin-cw {
+    animation: none;
+    will-change: auto;
+  }
+
+  .hero-glow {
+    filter: none !important;
+  }
+
+  .hero-badge,
+  .role-card-surface,
+  .hero-cta {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .hero-badge .animate-ping {
+    animation: none !important;
+  }
+
+  .construction-notice,
+  .stt-button {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .construction-notice .animate-pulse {
+    animation: none !important;
+  }
+
+  .role-icon {
+    box-shadow: 0 7px 18px rgba(15, 23, 42, 0.2) !important;
+  }
+
+  .hero-cta {
+    contain: paint;
+    transform: translateZ(0);
+  }
+
+  .hero-cta::before {
+    animation-duration: 4.5s;
+  }
+
+  .hero-cta:hover,
+  .hero-cta:active {
+    transform: none;
+  }
+
+  .role-track-node:hover .role-track-node-dot {
+    transform: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-root {
+    min-height: auto;
+  }
+
+  .hero-ambient-rings {
+    display: none;
+  }
+
+  .hero-glow--primary {
+    width: min(520px, 130vw) !important;
+    height: 360px !important;
+    opacity: 0.55;
+  }
+
+  .hero-glow--secondary {
+    display: none;
+  }
+
+  .hero-fade-in {
+    animation-name: heroFadeUpMobile;
+    animation-duration: 0.4s;
+  }
+
+  .hero-cta {
+    width: 100%;
+    height: 50px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 5px 16px rgba(15,23,42,0.16);
+  }
+
+  .hero-cta-arrow,
+  .hero-cta-arrow-r {
+    margin-left: auto;
+  }
+}
+
+@keyframes heroFadeUpMobile {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
    REDUCED MOTION
    ══════════════════════════════════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
   .hero-fade-in, .ring-spin-cw-slow, .ring-spin-ccw, .ring-spin-cw, .tablet-frame::before,
   .tablet-glare, .phone-content, .phone-view-inner, .tab-slide, .tab-quote-text, .an-bar,
   .term-line--boot, .tl-item--recent .tl-dot, .tab-building-dot, .dynamic-island,
-  .dynamic-island-text, .buildingTextIn { animation: none !important; transition: none !important; }
+  .dynamic-island-text, .buildingTextIn, .hero-cta::before { animation: none !important; transition: none !important; }
 }
 /* ═══════════════════════════════════════════════════════════════════════
    PERF: OFF-SCREEN ANIMATION PAUSE

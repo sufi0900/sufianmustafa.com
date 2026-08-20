@@ -1,7 +1,7 @@
 // sitemap.js - FIXED VERSION
 import { fetchURLs } from '../app/lib/sanity';
 
-const baseURL = 'https://doitwithai.tools';
+const baseURL = 'https://sufianmustafa.com/';
 
 // Define the correct URL mapping for your schema types
 const SCHEMA_TYPE_TO_URL_PREFIX = {

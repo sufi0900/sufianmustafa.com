@@ -1,6 +1,6 @@
 // app/api/export-pdf/route.ts
 import { NextRequest } from "next/server";
-import puppeteer from "puppeteer-core";
+import puppeteer from "puppeteer";
 import { findChromePath } from "@/lib/chrome-path";
 
 export async function GET(req: NextRequest) {

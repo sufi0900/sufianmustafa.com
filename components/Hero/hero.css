@@ -70,6 +70,11 @@
 .hero-cta--contact .hero-cta-bg { background: radial-gradient(ellipse at 30% 60%, rgba(16,185,129,0.16), transparent 65%); }
 .hero-cta--contact:hover { color: #fff; border-color: rgba(16,185,129,0.65); box-shadow: inset 0 1px 0 rgba(255,255,255,0.14), 0 14px 46px rgba(16,185,129,0.36); }
 
+.hero-cta--services { color: #E3B341; background: linear-gradient(135deg, rgba(227,179,65,0.14), rgba(201,149,44,0.08)); border: 1.5px solid rgba(227,179,65,0.45); box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 8px 32px rgba(227,179,65,0.22); }
+.hero-cta--services .hero-cta-icon { background: rgba(227,179,65,0.2); border: 1px solid rgba(227,179,65,0.35); }
+.hero-cta--services .hero-cta-bg { background: radial-gradient(ellipse at 30% 60%, rgba(227,179,65,0.2), transparent 65%); }
+.hero-cta--services:hover { color: #fff; border-color: rgba(227,179,65,0.8); box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), 0 14px 46px rgba(227,179,65,0.45); }
+
 /* ══════════════════════════════════════════════════════════════════════════
    ROLE TRACK
    ══════════════════════════════════════════════════════════════════════════ */

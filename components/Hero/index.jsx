@@ -343,17 +343,20 @@ A systems-focused architect combining search visibility, AI-augmented engineerin
 
           {/* CTAs */}
           <div className="hero-fade-in mt-7 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap" style={{ animationDelay: "320ms" }}>
-            <a href="https://lionxeframework.com" target="_blank" rel="noopener noreferrer" className="hero-cta hero-cta--lionxe group">
-              <span className="hero-cta-bg" /><span className="hero-cta-icon"><Shield size={16} aria-hidden /></span>LIONXE™ Framework<ArrowUpRight size={15} className="hero-cta-arrow" aria-hidden />
+            <a href="/services" className="hero-cta hero-cta--services group">
+              <span className="hero-cta-bg" /><span className="hero-cta-icon"><Shield size={16} aria-hidden /></span>Services & Advisory<ArrowUpRight size={15} className="hero-cta-arrow" aria-hidden />
+            </a>
+            <a href="/case-studies" className="hero-cta hero-cta--about group">
+              <span className="hero-cta-bg" /><span className="hero-cta-icon"><Users size={16} aria-hidden /></span>Case Studies<ChevronRight size={15} className="hero-cta-arrow-r" aria-hidden />
             </a>
             <a href="https://doitwithai.tools" target="_blank" rel="noopener noreferrer" className="hero-cta hero-cta--doit group">
               <span className="hero-cta-bg" /><span className="hero-cta-icon"><Globe size={16} aria-hidden /></span>DoItWithAI.tools<ArrowUpRight size={15} className="hero-cta-arrow" aria-hidden />
             </a>
-            <a href="/about" className="hero-cta hero-cta--about group">
-              <span className="hero-cta-bg" /><span className="hero-cta-icon"><Users size={16} aria-hidden /></span>About Sufian<ChevronRight size={15} className="hero-cta-arrow-r" aria-hidden />
+            <a href="https://lionxeframework.com" target="_blank" rel="noopener noreferrer" className="hero-cta hero-cta--lionxe group">
+              <span className="hero-cta-bg" /><span className="hero-cta-icon"><Shield size={16} aria-hidden /></span>LIONXE™ Standard<ArrowUpRight size={15} className="hero-cta-arrow" aria-hidden />
             </a>
             <a href="/contact" className="hero-cta hero-cta--contact group">
-              <span className="hero-cta-bg" /><span className="hero-cta-icon"><Mail size={16} aria-hidden /></span>Get in Touch<ChevronRightCircle size={15} className="hero-cta-arrow-r" aria-hidden />
+              <span className="hero-cta-bg" /><span className="hero-cta-icon"><Mail size={16} aria-hidden /></span>Inquire<ChevronRightCircle size={15} className="hero-cta-arrow-r" aria-hidden />
             </a>
           </div>
 

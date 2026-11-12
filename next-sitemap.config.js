@@ -1,29 +1,38 @@
-// export const siteUrl = 'https://www.doitwithai.tools';
-// export const generateRobotsTxt = true;
-// export const sitemapSize = 7000;
-// export const outDir = './public';
-// export async function transform(config, paths) {
-//   // Fetch all posts or items you need from Sanity.io
-//   const fetchedSchemas = await getAllSlugsFromSanity(); // Define this function to fetch your data
-//   const allPages = fetchedSchemas.map(slug => {
-//     return { loc: `${config.siteUrl}/${slug}`, changefreq: 'daily', priority: 0.7 };
-//   });
+/** @type {import('next-sitemap').IConfig} */
+module.exports = {
+  siteUrl: 'https://sufianmustafa.com',
+  generateRobotsTxt: false, // We maintain dedicated custom robots.txt in app/robots.txt and public/robots.txt
+  sitemapSize: 5000,
+  outDir: './public',
+  exclude: ['/admin', '/admin/*', '/api/*', '/studio', '/studio/*'],
+  transform: async (config, path) => {
+    // Custom priority mapping
+    let priority = 0.7;
+    let changefreq = 'weekly';
 
-//   return [...paths, ...allPages];
-// }
+    if (path === '/') {
+      priority = 1.0;
+      changefreq = 'daily';
+    } else if (path.startsWith('/services')) {
+      priority = 0.9;
+      changefreq = 'weekly';
+    } else if (path.startsWith('/case-studies')) {
+      priority = 0.9;
+      changefreq = 'weekly';
+    } else if (path === '/contact') {
+      priority = 0.85;
+      changefreq = 'monthly';
+    } else if (path === '/about' || path === '/work' || path === '/skills' || path === '/gulf-vision') {
+      priority = 0.8;
+      changefreq = 'monthly';
+    }
 
-// // An example function to fetch all unique pages' or posts' slugs across all schemas
-// async function getAllSlugsFromSanity() {
-//   const client = require('./sanity/lib/client'); // Update to import your configured Sanity client
-
-//   const types = ["makemoney", "aitool", "news", "coding", "freeairesources", "seo"];
-
-//   let slugs = [];
-//   for (let type of types) {
-//     const query = `*[_type == "${type}"]{ "slug": slug.current }`;
-//     const data = await client.fetch(query);
-//     slugs = slugs.concat(data.map(item => `${type}/${item.slug}`));
-//   }
-
-//   return slugs;
-// }
+    return {
+      loc: path,
+      changefreq,
+      priority,
+      lastmod: config.autoLastmod ? new Date().toISOString() : undefined,
+      alternateRefs: config.alternateRefs ?? [],
+    };
+  },
+};

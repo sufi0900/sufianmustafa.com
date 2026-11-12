@@ -254,6 +254,39 @@ export default function HomePage() {
       "@type": "Organization",
       name: "WAYWE Gaming",
     },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Growth Systems Architecture & Advisory Services",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "The LIONXE™ Digital Diagnostic & Architecture Audit",
+            url: "https://sufianmustafa.com/services/lionxe-audit",
+            description: "15-point root-cause technical SEO and multi-site architecture audit.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Next.js AI-Search (GEO / AEO) & Systems Architecture",
+            url: "https://sufianmustafa.com/services/ai-search-architecture",
+            description: "3-6 week engineering sprint building Next.js 14 platforms optimized for ChatGPT Search, Perplexity, and Google AI Overviews.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Fractional Growth Systems Architect",
+            url: "https://sufianmustafa.com/services/fractional-growth-architect",
+            description: "Executive advisory retainer for Dubai, UAE, Saudi Arabia, and global technology enterprises.",
+          },
+        },
+      ],
+    },
     founder: [
       {
         "@type": "Organization",

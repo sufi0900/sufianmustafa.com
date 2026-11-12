@@ -1,5 +1,5 @@
-# Dedicated to making doitwithai.tools accessible to all AI and Search Bots
-# Optimized for Google, GPT, Claude, and Perplexity
+# Dedicated to making sufianmustafa.com accessible to all AI and Search Bots
+# Optimized for Google, GPTBot, ClaudeBot, and PerplexityBot
 
 User-agent: *
 Allow: /
@@ -33,6 +33,5 @@ Allow: /
 User-agent: Googlebot-Image
 Allow: /
 
-# Sitemap links for better indexing
-Sitemap: https://doitwithai.tools/sitemap.xml
-Sitemap: https://doitwithai.tools/image-sitemap.xml
+# Canonical Sitemap link for Sufian Mustafa authority hub
+Sitemap: https://sufianmustafa.com/sitemap.xml

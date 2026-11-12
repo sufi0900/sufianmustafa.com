@@ -6,10 +6,11 @@
 import { Shield, SearchCheck, Lightbulb, Globe, Blocks, Cpu, Network } from "lucide-react";
 
 export const NAV_LINKS = [
+  { label: "Services",    href: "/services" },
+  { label: "Case Studies", href: "/case-studies" },
   { label: "About",       href: "/about" },
   { label: "LIONXE™",     href: "https://lionxeframework.com" },
   { label: "DoItWithAI",  href: "https://doitwithai.tools" },
-  { label: "Insights",    href: "/insights" },
   { label: "Contact",     href: "/contact" },
 ];
 

@@ -13,12 +13,10 @@ export const dynamic = "force-dynamic";
 
 // Enhanced utility functions
 function getBaseUrl() {
-  // For production, always use your custom domain
   if (process.env.NODE_ENV === 'production') {
-    return 'https://doitwithai.tools';  // Remove trailing slash
+    return 'https://sufianmustafa.com';
   }
   
-  // For development
   if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL}`;
   }

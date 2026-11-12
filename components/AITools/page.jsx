@@ -4,15 +4,11 @@ import { client } from "@/sanity/lib/client";
 import React, { useEffect, useState } from "react";
 import { urlForImage } from "@/sanity/lib/image"; 
 
-import {
-  Grid
-} from "@mui/material";
-
 import Breadcrumb from "../Common/Breadcrumb";
-import BigSkeleton from "@/components/Blog/Skeleton/HomeBigCard"
-import MedSkeleton from "@/components/Blog/Skeleton/HomeMedCard"
-import SmallCard from "@/components/Blog/HomeSmallCard"
-import BigCard from "@/components/Blog/HomeBigCard"
+import BigSkeleton from "@/components/Blog/Skeleton/HomeBigCard";
+import MedSkeleton from "@/components/Blog/Skeleton/HomeMedCard";
+import SmallCard from "@/components/Blog/HomeSmallCard";
+import BigCard from "@/components/Blog/HomeBigCard";
 import Link from "next/link";
 const AiTools = () => {
   const [aiToolTrendBigData, setAiToolTrendBigData] = useState([]);
@@ -81,8 +77,8 @@ const AiTools = () => {
         firstlink="/"
         link="/ai-tools" 
         linktext="aitools"     />
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={4}>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
         {aiToolTrendBigData.slice(0, 1).map((post) => (
 
                 <BigCard 
@@ -97,13 +93,13 @@ const AiTools = () => {
                 /> 
                           
              ))}
-        </Grid>
+        </div>
 
-        <Grid item xs={12} md={4}>
+        <div>
         {isLoading ? (
-      <Grid item xs={12} >
+      <div>
       <BigSkeleton/>
-        </Grid>
+        </div>
     ) : (
    
         aiToolTrendBigData.slice(1, 2).map((post) => (
@@ -118,9 +114,9 @@ const AiTools = () => {
            tags={post.tags}
            /> 
               )   ))}
-        </Grid>
+        </div>
 
-        <Grid item xs={12} md={4}>
+        <div>
         {aiToolTrendBigData.slice(2, 3).map((post) => (
          <BigCard 
          key={post}
@@ -133,11 +129,11 @@ const AiTools = () => {
          tags={post.tags}
          /> 
                 ))}
-        </Grid>
+        </div>
 
         {/* Small Blogs */}
         {aiToolTrendRelatedData.slice(0, 3).map((post) => (
-          <Grid key={post._id} item xs={12} md={4}>
+          <div key={post._id}>
                          <SmallCard 
                 key={post}
                 title={post.title}
@@ -148,9 +144,9 @@ const AiTools = () => {
                 ReadTime={post.readTime?.minutes}
                 tags={post.tags}
                 /> 
-          </Grid>
+          </div>
         ))}
-      </Grid>
+      </div>
       <div className="mt-6 flex justify-center md:justify-end">
         <Link href="/ai-tools">
         <button className="rounded-lg bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700">

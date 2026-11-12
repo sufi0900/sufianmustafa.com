@@ -8,17 +8,19 @@ import { useEffect, useState } from "react";
 import "./navbar.css";
 
 const navLinks = [
+  { label: "Services", href: "/services" },
+  { label: "Case Studies", href: "/case-studies" },
   { label: "About", href: "/about" },
   { label: "Skills", href: "/skills" },
-  { label: "Work", href: "/work" },
   { label: "Journey", href: "/success-journey" },
-  { label: "Blogs", href: "/blogs" },
 ];
 
 const secondaryLinks = [
+  { label: "Work", href: "/work" },
+  { label: "Gulf Vision", href: "/gulf-vision" },
   { label: "Timeline", href: "/timeline" },
   { label: "FAQ", href: "/faq" },
-  { label: "Gulf Vision", href: "/gulf-vision" },
+  { label: "Insights", href: "/insights" },
 ];
 
 const ecosystemLinks = [

@@ -1,91 +1,147 @@
 {
   "version": "1.0.0",
-  "generated": "2025-07-15T22:06:22.957Z",
+  "generated": "2026-11-11T19:17:02.031Z",
   "static_pages": [
     {
       "url": "/",
-      "title": "Home",
+      "title": "Home — Sufian Mustafa | Growth Systems Architect",
       "priority": "high",
       "type": "static",
-      "lastModified": "2025-07-15T22:06:22.955Z"
+      "lastModified": "2026-11-11T19:17:02.030Z"
+    },
+    {
+      "url": "/services",
+      "title": "Services & Advisory — High-Ticket SEO & Systems Architecture",
+      "priority": "high",
+      "type": "static",
+      "lastModified": "2026-11-11T19:17:02.031Z"
+    },
+    {
+      "url": "/services/lionxe-audit",
+      "title": "The LIONXE™ Digital Diagnostic & Architecture Audit",
+      "priority": "high",
+      "type": "static",
+      "lastModified": "2026-11-11T19:17:02.031Z"
+    },
+    {
+      "url": "/services/ai-search-architecture",
+      "title": "Next.js AI-Search (GEO / AEO) & Systems Architecture",
+      "priority": "high",
+      "type": "static",
+      "lastModified": "2026-11-11T19:17:02.031Z"
+    },
+    {
+      "url": "/services/fractional-growth-architect",
+      "title": "Fractional Growth Systems Architect (GCC & Global)",
+      "priority": "high",
+      "type": "static",
+      "lastModified": "2026-11-11T19:17:02.031Z"
+    },
+    {
+      "url": "/case-studies",
+      "title": "Case Studies & Proof of Execution",
+      "priority": "high",
+      "type": "static",
+      "lastModified": "2026-11-11T19:17:02.031Z"
+    },
+    {
+      "url": "/case-studies/doitwithai",
+      "title": "Case Study: Engineering DoItWithAI.tools for AI Search",
+      "priority": "high",
+      "type": "static",
+      "lastModified": "2026-11-11T19:17:02.031Z"
+    },
+    {
+      "url": "/case-studies/enterprise-87-site-audit",
+      "title": "Case Study: 87-Site Enterprise Audit (226,200 URLs)",
+      "priority": "high",
+      "type": "static",
+      "lastModified": "2026-11-11T19:17:02.031Z"
+    },
+    {
+      "url": "/case-studies/lionxe-framework",
+      "title": "Case Study: The LIONXE™ Quality Standard",
+      "priority": "high",
+      "type": "static",
+      "lastModified": "2026-11-11T19:17:02.031Z"
     },
     {
       "url": "/about",
-      "title": "About",
+      "title": "About Sufian Mustafa",
       "priority": "medium",
       "type": "static",
-      "lastModified": "2025-07-15T22:06:22.957Z"
+      "lastModified": "2026-11-11T19:17:02.031Z"
+    },
+    {
+      "url": "/work",
+      "title": "Work & Proof of Execution",
+      "priority": "medium",
+      "type": "static",
+      "lastModified": "2026-11-11T19:17:02.031Z"
+    },
+    {
+      "url": "/skills",
+      "title": "Skills & Technical Architecture",
+      "priority": "medium",
+      "type": "static",
+      "lastModified": "2026-11-11T19:17:02.031Z"
+    },
+    {
+      "url": "/gulf-vision",
+      "title": "Gulf Vision — Dubai, UAE & GCC Strategic Direction",
+      "priority": "medium",
+      "type": "static",
+      "lastModified": "2026-11-11T19:17:02.031Z"
+    },
+    {
+      "url": "/success-journey",
+      "title": "Success Journey & Philosophy",
+      "priority": "medium",
+      "type": "static",
+      "lastModified": "2026-11-11T19:17:02.031Z"
+    },
+    {
+      "url": "/timeline",
+      "title": "Professional Journey Timeline",
+      "priority": "low",
+      "type": "static",
+      "lastModified": "2026-11-11T19:17:02.031Z"
+    },
+    {
+      "url": "/insights",
+      "title": "Insights & Systems Architecture",
+      "priority": "medium",
+      "type": "static",
+      "lastModified": "2026-11-11T19:17:02.031Z"
     },
     {
       "url": "/faq",
-      "title": "FAQ",
+      "title": "Frequently Asked Questions",
       "priority": "medium",
       "type": "static",
-      "lastModified": "2025-07-15T22:06:22.957Z"
+      "lastModified": "2026-11-11T19:17:02.031Z"
     },
     {
       "url": "/contact",
-      "title": "Contact",
-      "priority": "medium",
+      "title": "Contact & Select Engagements",
+      "priority": "high",
       "type": "static",
-      "lastModified": "2025-07-15T22:06:22.957Z"
+      "lastModified": "2026-11-11T19:17:02.031Z"
     },
     {
       "url": "/privacy",
       "title": "Privacy Policy",
       "priority": "low",
       "type": "static",
-      "lastModified": "2025-07-15T22:06:22.957Z"
+      "lastModified": "2026-11-11T19:17:02.031Z"
     },
     {
       "url": "/terms",
       "title": "Terms of Service",
       "priority": "low",
       "type": "static",
-      "lastModified": "2025-07-15T22:06:22.957Z"
-    },
-    {
-      "url": "/ai-tools",
-      "title": "AI Tools",
-      "priority": "high",
-      "type": "static",
-      "lastModified": "2025-07-15T22:06:22.957Z"
-    },
-    {
-      "url": "/ai-seo",
-      "title": "AI SEO",
-      "priority": "high",
-      "type": "static",
-      "lastModified": "2025-07-15T22:06:22.957Z"
-    },
-    {
-      "url": "/ai-code",
-      "title": "AI Code",
-      "priority": "high",
-      "type": "static",
-      "lastModified": "2025-07-15T22:06:22.957Z"
-    },
-    {
-      "url": "/ai-learn-earn",
-      "title": "AI Learn & Earn",
-      "priority": "high",
-      "type": "static",
-      "lastModified": "2025-07-15T22:06:22.957Z"
-    },
-    {
-      "url": "/free-ai-resources",
-      "title": "Free AI Resources",
-      "priority": "medium",
-      "type": "static",
-      "lastModified": "2025-07-15T22:06:22.957Z"
-    },
-    {
-      "url": "/ai-news",
-      "title": "AI News",
-      "priority": "medium",
-      "type": "static",
-      "lastModified": "2025-07-15T22:06:22.957Z"
+      "lastModified": "2026-11-11T19:17:02.031Z"
     }
   ],
-  "total_pages": 12
+  "total_pages": 20
 }

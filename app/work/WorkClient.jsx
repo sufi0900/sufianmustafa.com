@@ -240,14 +240,17 @@ export default function WorkClient() {
           Together, they form the evidence that Growth Systems Architecture is not a theory — it ships.
         </p>
         <div className="work-ecosystem-links">
-          <a href="https://doitwithai.tools" target="_blank" rel="noopener noreferrer" className="work-eco-link" style={{ "--eco-color": "#5271FF" }}>
+          <a href="/services" className="work-eco-link" style={{ "--eco-color": "#E3B341" }}>
+            <Zap size={16} /> Services & Advisory <ArrowUpRight size={13} />
+          </a>
+          <a href="/case-studies" className="work-eco-link" style={{ "--eco-color": "#5271FF" }}>
+            <Layers size={16} /> Detailed Case Studies <ArrowUpRight size={13} />
+          </a>
+          <a href="https://doitwithai.tools" target="_blank" rel="noopener noreferrer" className="work-eco-link" style={{ "--eco-color": "#00D9FF" }}>
             <Globe2 size={16} /> DoItWithAI.tools <ArrowUpRight size={13} />
           </a>
           <a href="https://lionxeframework.com" target="_blank" rel="noopener noreferrer" className="work-eco-link" style={{ "--eco-color": "#4D7BFF" }}>
             <Shield size={16} /> LIONXE™ <ArrowUpRight size={13} />
-          </a>
-          <a href="/contact" className="work-eco-link" style={{ "--eco-color": "#E3B341" }}>
-            <FileText size={16} /> Request audit sample <ArrowUpRight size={13} />
           </a>
         </div>
       </section>

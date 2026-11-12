@@ -29,7 +29,7 @@ export default async function sitemap() {
             };
         });
 
-        // Add all your static routes (THIS WAS MISSING!)
+        // Add all high-authority static routes
         const staticRoutes = [
             // Homepage
             {
@@ -38,83 +38,107 @@ export default async function sitemap() {
                 changeFrequency: 'daily',
                 priority: 1.0,
             },
-            // Main category pages
+            // High-Ticket Services
             {
-                url: `${baseURL}/ai-tools`,
+                url: `${baseURL}services`,
                 lastModified: new Date(),
-                changeFrequency: 'daily',
+                changeFrequency: 'weekly',
+                priority: 0.95,
+            },
+            {
+                url: `${baseURL}services/lionxe-audit`,
+                lastModified: new Date(),
+                changeFrequency: 'weekly',
                 priority: 0.9,
             },
             {
-                url: `${baseURL}/ai-seo`,
+                url: `${baseURL}services/ai-search-architecture`,
                 lastModified: new Date(),
-                changeFrequency: 'daily', 
+                changeFrequency: 'weekly',
                 priority: 0.9,
             },
             {
-                url: `${baseURL}/ai-code`,
+                url: `${baseURL}services/fractional-growth-architect`,
                 lastModified: new Date(),
-                changeFrequency: 'daily',
+                changeFrequency: 'weekly',
+                priority: 0.9,
+            },
+            // Case Studies & Proof of Execution
+            {
+                url: `${baseURL}case-studies`,
+                lastModified: new Date(),
+                changeFrequency: 'weekly',
+                priority: 0.95,
+            },
+            {
+                url: `${baseURL}case-studies/doitwithai`,
+                lastModified: new Date(),
+                changeFrequency: 'weekly',
                 priority: 0.9,
             },
             {
-                url: `${baseURL}/ai-learn-earn`,
+                url: `${baseURL}case-studies/enterprise-87-site-audit`,
                 lastModified: new Date(),
-                changeFrequency: 'daily',
+                changeFrequency: 'weekly',
                 priority: 0.9,
             },
             {
-                url: `${baseURL}/free-ai-resource`,
+                url: `${baseURL}case-studies/lionxe-framework`,
+                lastModified: new Date(),
+                changeFrequency: 'weekly',
+                priority: 0.9,
+            },
+            // Core Identity & Strategy
+            {
+                url: `${baseURL}about`,
+                lastModified: new Date(),
+                changeFrequency: 'monthly',
+                priority: 0.8,
+            },
+            {
+                url: `${baseURL}work`,
                 lastModified: new Date(),
                 changeFrequency: 'weekly',
                 priority: 0.8,
             },
             {
-                url: `${baseURL}/blogs`,
+                url: `${baseURL}skills`,
                 lastModified: new Date(),
-                changeFrequency: 'daily',
+                changeFrequency: 'monthly',
                 priority: 0.8,
             },
-            // Other important pages
             {
-                url: `${baseURL}/about`,
+                url: `${baseURL}gulf-vision`,
                 lastModified: new Date(),
                 changeFrequency: 'monthly',
-                priority: 0.6,
+                priority: 0.8,
             },
             {
-                url: `${baseURL}/contact`,
+                url: `${baseURL}success-journey`,
                 lastModified: new Date(),
                 changeFrequency: 'monthly',
-                priority: 0.5,
-            },
-            {
-                url: `${baseURL}/blogs`,
-                lastModified: new Date(),
-                changeFrequency: 'weekly',
                 priority: 0.7,
             },
-            // Newly added static pages
             {
-                url: `${baseURL}/navigation`,
+                url: `${baseURL}contact`,
+                lastModified: new Date(),
+                changeFrequency: 'monthly',
+                priority: 0.85,
+            },
+            {
+                url: `${baseURL}faq`,
                 lastModified: new Date(),
                 changeFrequency: 'monthly',
                 priority: 0.6,
             },
             {
-                url: `${baseURL}/author/sufian-mustafa`,
+                url: `${baseURL}timeline`,
                 lastModified: new Date(),
                 changeFrequency: 'monthly',
                 priority: 0.5,
             },
             {
-                url: `${baseURL}/faq`,
-                lastModified: new Date(),
-                changeFrequency: 'monthly',
-                priority: 0.6,
-            },
-            {
-                url: `${baseURL}/categories`,
+                url: `${baseURL}insights`,
                 lastModified: new Date(),
                 changeFrequency: 'weekly',
                 priority: 0.7,

@@ -7,8 +7,9 @@ import { news } from "./news";
 import { blog } from "./blogs";
 import { brands } from "./brands";
 import { seoSubcategory } from "./seoSubcategory";
-
+import { service } from "./service";
+import { caseStudy } from "./caseStudy";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [blog, aitool, makemoney, news, coding, brands, seo, seoSubcategory ],
+  types: [blog, service, caseStudy, aitool, makemoney, news, coding, brands, seo, seoSubcategory],
 };

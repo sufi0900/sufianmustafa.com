@@ -17,10 +17,12 @@ import {
 
 const footerLinks = {
   explore: [
+    { title: "Services", path: "/services" },
+    { title: "Case Studies", path: "/case-studies" },
     { title: "About", path: "/about" },
     { title: "Skills", path: "/skills" },
     { title: "Work", path: "/work" },
-    { title: "Insights", path: "/insights" },
+    { title: "Gulf Vision", path: "/gulf-vision" },
     { title: "Select Engagements", path: "/contact" },
   ],
   ecosystem: [

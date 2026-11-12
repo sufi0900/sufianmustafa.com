@@ -4,22 +4,24 @@
 
 import React from 'react';
 import Link from 'next/link';
-import HomeIcon from '@mui/icons-material/Home';
-import BuildIcon from '@mui/icons-material/Build';
-import CodeIcon from '@mui/icons-material/Code';
-import SchoolIcon from '@mui/icons-material/School';
-import SearchIcon from '@mui/icons-material/Search';
-import DownloadIcon from '@mui/icons-material/Download';
-import ContactMailIcon from '@mui/icons-material/ContactMail';
-import PersonIcon from '@mui/icons-material/Person';
-import InfoIcon from '@mui/icons-material/Info';
-import ArticleIcon from '@mui/icons-material/Article';
-import HelpIcon from '@mui/icons-material/Help';
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
-import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import EmailIcon from '@mui/icons-material/Email';
+import {
+  Home as HomeIcon,
+  Wrench as BuildIcon,
+  Code2 as CodeIcon,
+  GraduationCap as SchoolIcon,
+  Search as SearchIcon,
+  Download as DownloadIcon,
+  Mail as ContactMailIcon,
+  User as PersonIcon,
+  Info as InfoIcon,
+  FileText as ArticleIcon,
+  HelpCircle as HelpIcon,
+  TrendingUp as TrendingUpIcon,
+  Sparkles as AutoAwesomeIcon,
+  Rocket as RocketLaunchIcon,
+  DollarSign as MonetizationOnIcon,
+  Mail as EmailIcon,
+} from 'lucide-react';
 
 export default function NavigationClient() {
   return (

@@ -2,7 +2,7 @@
 
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -75,6 +75,20 @@ const Contact = () => {
     projectType: false,
     message: false,
   });
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const serviceParam = params.get("service");
+      if (serviceParam === "lionxe-audit") {
+        setFormData((prev) => ({ ...prev, projectType: "Technical SEO Audit" }));
+      } else if (serviceParam === "ai-search-architecture") {
+        setFormData((prev) => ({ ...prev, projectType: "AI SEO / GEO Consulting" }));
+      } else if (serviceParam === "fractional-growth-architect") {
+        setFormData((prev) => ({ ...prev, projectType: "Strategic Collaboration" }));
+      }
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
